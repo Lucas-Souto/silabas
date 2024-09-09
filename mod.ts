@@ -1,11 +1,11 @@
-const graveVowels = "áéíóú";
+const acuteVowels = "áéíóú";
 const tildeVowels = "ãẽĩõũ";
-const accentVowels = "àâäèêëìîïòôöùûü" + graveVowels + tildeVowels;
+const accentVowels = "àâäèêëìîïòôöùûü" + acuteVowels + tildeVowels;
 const vowels = "aeiou" + accentVowels;
 const consonants = "bcdfghjklmnpqrstvwxyzç";
 
 function isVowel(char: string) : boolean { return vowels.indexOf(char) != -1; }
-function isGraveVowel(char: string) : boolean { return graveVowels.indexOf(char) != -1; }
+function isAcuteVowel(char: string) : boolean { return acuteVowels.indexOf(char) != -1; }
 function isTildeVowel(char: string) : boolean { return tildeVowels.indexOf(char) != -1; }
 function isAccentVowel(char: string) : boolean { return accentVowels.indexOf(char) != -1; }
 function isConsonant(char: string) : boolean { return consonants.indexOf(char) != -1; }
@@ -112,7 +112,7 @@ export function split(input: string) : string[]
         result[index] += input[i];
 
         if (result[index].length == 3) br();
-		else if (isGraveVowel(input[i])) br();
+		else if (isAcuteVowel(input[i])) br();
         else if (i < input.length - 1)
         {
             if (input[i + 1] == 'r' && !isValidPair(input[i], 'r')) br();
