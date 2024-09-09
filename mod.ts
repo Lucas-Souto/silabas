@@ -87,6 +87,10 @@ function postProcess(syllables: string[]) : void
 	}
 }
 
+/**
+ * Separa as sílabas de uma palavra.
+ * @param input A palavra em si.
+ * @returns string[], em minúsculo. */
 export function split(input: string) : string[]
 {
 	input = input.toLowerCase();
