@@ -46,13 +46,13 @@ function postProcess(syllables: string[]) : void
 			previousLength = syllables[i - 1].length;
 			previousLast = syllables[i - 1][previousLength - 1];
 
-			if (isVowel(syllables[i][0]) && isConsonant(previousLast))
-            {
-                syllables[i - 1] = syllables[i - 1].substring(0, previousLength - 1);
-                syllables[i] = previousLast + syllables[i];
-            }
-            else if (syllables[i].length == 1)
-            {
+			if (((syllables[i][0] == 'h' && isVowel(syllables[i][1])) || isVowel(syllables[i][0])) && isConsonant(previousLast))
+			{
+				syllables[i - 1] = syllables[i - 1].substring(0, previousLength - 1);
+				syllables[i] = previousLast + syllables[i];
+			}
+			else if (syllables[i].length == 1)
+			{
 				if (isConsonant(syllables[i]))
 				{
 					if (isVowel(previousLast))
@@ -68,7 +68,7 @@ function postProcess(syllables: string[]) : void
 						syllables.splice(i, 1);
 					}
 				}
-                else if (previousLast == 'i' || previousLast == 'u')
+				else if (previousLast == 'i' || previousLast == 'u')
 				{
 					if (previousLength > 1 && isVowel(syllables[i - 1][previousLength - 2]))
 					{
@@ -82,30 +82,30 @@ function postProcess(syllables: string[]) : void
 						syllables.splice(i, 1);
 					}
 				}
-            }
+			}
 		}
 	}
 }
 
 /**
- * Separa as sílabas de uma palavra.
- * @param input A palavra em si.
- * @returns string[], em minúsculo. */
+* Separa as sílabas de uma palavra.
+* @param input A palavra em si.
+* @returns string[], em minúsculo. */
 export function split(input: string) : string[]
 {
 	input = input.toLowerCase();
 	const result = [''];
-  	let index = 0;
+	let index = 0;
 
-    const br = () =>
-    {
-        result.push('');
+	const br = () =>
+	{
+		result.push('');
 
-        index++;
-    }
+		index++;
+	}
 
-  	for (let i = 0; i < input.length; i++)
-    {
+	for (let i = 0; i < input.length; i++)
+	{
 		if (input[i] == '-')
 		{
 			br();
@@ -113,20 +113,20 @@ export function split(input: string) : string[]
 			continue;
 		}
 
-        result[index] += input[i];
+		result[index] += input[i];
 
-        if (result[index].length == 3) br();
+		if (result[index].length == 3) br();
 		else if (isAcuteVowel(input[i])) br();
-        else if (i < input.length - 1)
-        {
-            if (input[i + 1] == 'r' && !isValidPair(input[i], 'r')) br();
-            else if (input[i] == 'h' && isVowel(input[i + 1]))
-            {
-                i++;
-                result[index] += input[i];
+		else if (i < input.length - 1)
+		{
+			if (input[i + 1] == 'r' && !isValidPair(input[i], 'r')) br();
+			else if (input[i] == 'h' && isVowel(input[i + 1]))
+			{
+				i++;
+				result[index] += input[i];
 
-                br();
-            }
+				br();
+			}
 			else if (isTildeVowel(input[i]) && isVowel(input[i + 1]))
 			{
 				i++;
@@ -134,41 +134,41 @@ export function split(input: string) : string[]
 
 				br();
 			}
-            else if (i + 1 < input.length - 1)
-            {
+			else if (i + 1 < input.length - 1)
+			{
 				if (input[i] == 'q' && isVowel(input[i + 1]) && isVowel(input[i + 2]))
 				{
 					result[index] += input[i + 1];
-                    result[index] += input[i + 2];
-                    i += 2;
+					result[index] += input[i + 2];
+					i += 2;
 
-                    br();
+					br();
 				}
-                else if (input[i + 1] == 'h' && isValidPair(input[i], 'h') && isVowel(input[i + 2]))
-                {
-                    result[index] += input[i + 1];
-                    result[index] += input[i + 2];
-                    i += 2;
+				else if (input[i + 1] == 'h' && isValidPair(input[i], 'h') && isVowel(input[i + 2]))
+				{
+					result[index] += input[i + 1];
+					result[index] += input[i + 2];
+					i += 2;
 
-                    br();
-                }
-                else if (input[i + 2] == 'r' && isValidPair(input[i + 1], 'r'))
-                {
-                    if (result[index].length > 1) br();
+					br();
+				}
+				else if (input[i + 2] == 'r' && isValidPair(input[i + 1], 'r'))
+				{
+					if (result[index].length > 1) br();
 
-                    i++;
-                    result[index] += input[i];
-                }
-                else if (input[i + 1] != 'r' && isConsonant(input[i + 1]) && isVowel(input[i + 2])) br();
-            }
-            else if (isVowel(input[i]) && isVowel(input[i + 1])) br();
-            else if (isConsonant(input[i]) && input[i] == input[i + 1]) br();
-        }
-    }
+					i++;
+					result[index] += input[i];
+				}
+				else if (input[i + 1] != 'r' && isConsonant(input[i + 1]) && isVowel(input[i + 2])) br();
+			}
+			else if (isVowel(input[i]) && isVowel(input[i + 1])) br();
+			else if (isConsonant(input[i]) && input[i] == input[i + 1]) br();
+		}
+	}
 
-    if (result[index] == '') result.pop();
+	if (result[index] == '') result.pop();
 
-    postProcess(result);
-  
-  	return result;
+	postProcess(result);
+
+	return result;
 }
