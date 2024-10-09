@@ -96,7 +96,7 @@ function postProcess(syllables: string[]) : void
 /**
 * Separa as sílabas de uma palavra.
 * @param input A palavra em si.
-* @returns string[] As sílabas. */
+* @returns As sílabas. */
 export default function split(input: string) : string[]
 {
 	const result = [''];
