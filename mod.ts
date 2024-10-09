@@ -1,3 +1,7 @@
+/**
+ * Este módulo contém a função {@link split}, para separação de sílabas (em português).
+ * @module
+ */
 import alphabet from './alphabet.ts';
 
 function isVowel(char: string) : boolean { return alphabet.foundOn(alphabet.VOWELS, char); }
@@ -93,7 +97,7 @@ function postProcess(syllables: string[]) : void
 * Separa as sílabas de uma palavra.
 * @param input A palavra em si.
 * @returns string[] As sílabas. */
-export function split(input: string) : string[]
+export default function split(input: string) : string[]
 {
 	const result = [''];
 	let index = 0;

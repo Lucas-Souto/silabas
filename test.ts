@@ -1,4 +1,4 @@
-import { split } from "./mod.ts";
+import split from "./mod.ts";
 import { assertEquals } from "jsr:@std/assert@1";
 
 Deno.test("Separação silábica", () =>
