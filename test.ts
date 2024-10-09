@@ -9,7 +9,7 @@ Deno.test("Separação silábica", () =>
 		"carro", "taxi", "choro", "hora", "otorrinolaringologista",
 		"octeto", "principal", "princípio", "ideia", "pague", "quindim",
 		"caqui", "quando", "paquera", "arco-íris", "íamos", "não", "alemão",
-		"manha"
+		"manha", "DifERente"
 	];
 	const expected =
 	[
@@ -17,7 +17,7 @@ Deno.test("Separação silábica", () =>
 		["car", "ro"], ["ta", "xi"], ["cho", "ro"], ["ho", "ra"], ["o", "tor", "ri", "no", "la", "rin", "go", "lo", "gis", "ta"],
 		["oc", "te", "to"], ["prin", "ci", "pal"], ["prin", "cí", "pio"], ["i", "de", "ia"],  ["pa", "gue"], ["quin", "dim"],
 		["ca", "qui"], ["quan", "do"], ["pa", "que", "ra"], ["ar", "co", "í", "ris"], ["í", "a", "mos"], ["não"], ["a", "le", "mão"],
-		["ma", "nha"]
+		["ma", "nha"], ["Di", "fE", "Ren", "te"]
 	];
 
 	for (let i = 0; i < input.length; i++)
